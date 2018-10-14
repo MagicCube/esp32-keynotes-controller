@@ -1,6 +1,7 @@
 #include "KeynotesController.h"
 
 #include "conf.h"
+#include "log.h"
 
 #include "BLEKeyboard.h"
 
@@ -8,13 +9,13 @@ KeynotesControllerClass::KeynotesControllerClass() {
 }
 
 void KeynotesControllerClass::nextSlide() {
-  BLEKeyboard.pressKey(KEY_CODE_NEXT_SLIDE);
-  BLEKeyboard.releaseAll();
+  BLEKeyboard.strokeKey(KEY_CODE_NEXT_SLIDE);
+  LOG_D("<< NEXT SLIDE >>");
 }
 
 void KeynotesControllerClass::previousSlide() {
-  BLEKeyboard.pressKey(KEY_CODE_NEXT_SLIDE);
-  BLEKeyboard.releaseAll();
+  BLEKeyboard.strokeKey(KEY_CODE_NEXT_SLIDE);
+  LOG_D("<< PREVIOUS SLIDE >>");
 }
 
 KeynotesControllerClass KeynotesController;

@@ -5,9 +5,23 @@
 #define DEVICE_NAME "KeyLight"
 
 #define LASER_EMITTER_PIN 23
-#define UP_KEY_PIN 22
-#define MIDDLE_KEY_PIN 21
-#define DOWN_KEY_PIN 20
+#define NEXT_SLIDE_BUTTON_PIN 20
+#define PREVIOUS_SLIDE_KEY_PIN 19
+#define LASER_BUTTON_PIN 18
+
+/*
+ * HOME  - 0x4a
+ * END   - 0x4d
+ * RIGHT - 0x4f
+ * LEFT  - 0x50
+ * DOWN  - 0x51
+ * UP    - 0x52
+ */
+#define KEY_CODE_LEFT_ARROW 0x50
+#define KEY_CODE_RIGHT_ARROW 0x4f
+
+#define KEY_CODE_PREVIOUS_SLIDE KEY_CODE_LEFT_ARROW
+#define KEY_CODE_NEXT_SLIDE KEY_CODE_RIGHT_ARROW
 
 const uint8_t KEYBOARD_REPORT_MAP[] PROGMEM = {
     USAGE_PAGE(1),

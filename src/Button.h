@@ -10,4 +10,5 @@ public:
   void update();
 
 private:
+  uint8_t _pin;
 };

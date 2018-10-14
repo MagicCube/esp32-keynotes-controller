@@ -7,6 +7,7 @@ public:
   Button(uint8_t pin);
 
   void begin();
+  void update();
 
 private:
 };

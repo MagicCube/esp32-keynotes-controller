@@ -1,12 +1,15 @@
 #include "BLEKeyboard.h"
 
 #include "conf.h"
+#include "log.h"
 
 BLEKeyboardClass::BLEKeyboardClass() {
 }
 
 void BLEKeyboardClass::begin() {
   _server = BLEDevice::createServer();
+  _server->setCallbacks(this);
+
   _hid = new BLEHIDDevice(_server);
 
   // Input / Output
@@ -45,23 +48,44 @@ void BLEKeyboardClass::startAdvertising() {
   advertising->addServiceUUID(_hid->hidService()->getUUID());
   advertising->start();
   _server->startAdvertising();
+  LOG_I("BLE advertising has been stated.");
 }
 
 void BLEKeyboardClass::stopAdvertising() {
   BLEAdvertising *advertising = _server->getAdvertising();
   advertising->stop();
+  LOG_I("BLE advertising has been stopped.");
 }
 
 void BLEKeyboardClass::pressKey(uint8_t keyCode) {
   uint8_t report[] = {0x0, 0x0, 0x51, 0x0, 0x0, 0x0, 0x0, 0x0};
   _inputCharacteristic->setValue(report, sizeof(report));
   _inputCharacteristic->notify();
+  LOG_D("Key '%d' has been pressed.", keyCode);
 }
 
 void BLEKeyboardClass::releaseAll() {
   uint8_t report[] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
   _inputCharacteristic->setValue(report, sizeof(report));
   _inputCharacteristic->notify();
+  LOG_D("All keys have been released.");
+}
+
+void BLEKeyboardClass::strokeKey(uint8_t keyCode) {
+  pressKey(keyCode);
+  releaseAll();
+}
+
+void BLEKeyboardClass::onConnect(BLEServer *server) {
+  _connected = true;
+  LOG_I("%s has been connected.", DEVICE_NAME);
+  stopAdvertising();
+}
+
+void BLEKeyboardClass::onDisconnect(BLEServer *server) {
+  _connected = false;
+  LOG_I("%s has been disconnected.", DEVICE_NAME);
+  startAdvertising();
 }
 
 void BLEKeyboardClass::_setAccessPermission(BLECharacteristic *characteristic) {

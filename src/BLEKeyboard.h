@@ -8,13 +8,16 @@
 /**
  * Represents a virtual Bluetooth keyboard.
  */
-class BLEKeyboardClass {
+class BLEKeyboardClass : public BLEServerCallbacks {
 public:
   // Creates a new instance of `BLEKeyboardClass`.
   BLEKeyboardClass();
 
   // Initializes the BLE HID server.
   void begin();
+
+  // Returns a boolean that indicates whether the Keyboard has been connected.
+  bool isConnected();
 
   // Starts BLE advertising.
   void startAdvertising();
@@ -27,6 +30,13 @@ public:
 
   // Simulates releasing all the pressed keys.
   void releaseAll();
+
+  // Simulates pressing and releasing the specific key.
+  void strokeKey(uint8_t keyCode);
+
+  // Implements BLEServerCallbacks interface
+  void onConnect(BLEServer *server);
+  void onDisconnect(BLEServer *server);
 
 private:
   void _setAccessPermission(BLECharacteristic *characteristic);

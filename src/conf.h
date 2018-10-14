@@ -9,6 +9,9 @@
 #define PREVIOUS_SLIDE_BUTTON_PIN 4
 #define LASER_BUTTON_PIN 5
 
+// Sleep after 5 minutes
+#define MAX_ACTIVE_TIME 5 * 60 * 1000
+
 /*
  * HOME  - 0x4a
  * END   - 0x4d

@@ -17,7 +17,21 @@ Button nextSlideButton(NEXT_SLIDE_BUTTON_PIN);
 Button laserButton(LASER_BUTTON_PIN);
 LaserLight laserLight(LASER_LIGHT_PIN);
 
-int eventCounter = 0;
+unsigned long lastActiveTime = 0;
+
+void activate() {
+  lastActiveTime = millis();
+}
+
+void updateButtons() {
+  previousSlideButton.update();
+  nextSlideButton.update();
+  laserButton.update();
+}
+
+void deepSleep() {
+  esp_deep_sleep_start();
+}
 
 void setup() {
   // Disable brownout detector
@@ -34,15 +48,23 @@ void setup() {
   previousSlideButton.onPress([]() {
     LOG_D("<<");
     KeynotesController.previousSlide();
+    activate();
   });
   previousSlideButton.begin();
   nextSlideButton.onPress([]() {
     LOG_D(">>");
     KeynotesController.nextSlide();
+    activate();
   });
   nextSlideButton.begin();
-  laserButton.onPress([]() { laserLight.turnOn(); });
-  laserButton.onRelease([]() { laserLight.turnOff(); });
+  laserButton.onPress([]() {
+    laserLight.turnOn();
+    activate();
+  });
+  laserButton.onRelease([]() {
+    laserLight.turnOff();
+    activate();
+  });
   laserButton.begin();
   laserLight.begin();
 
@@ -56,12 +78,10 @@ void setup() {
   LOG_I("Initialization has been <DONE>.");
 }
 
-void updateButtons() {
-  previousSlideButton.update();
-  nextSlideButton.update();
-  laserButton.update();
-}
-
 void loop() {
   updateButtons();
+
+  if (millis() - lastActiveTime > MAX_ACTIVE_TIME) {
+    deepSleep();
+  }
 }

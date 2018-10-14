@@ -1,0 +1,9 @@
+BasedOnStyle: LLVM
+
+AllowShortFunctionsOnASingleLine: false
+ColumnLimit: 100
+IndentWidth: 2
+KeepEmptyLinesAtTheStartOfBlocks: true
+MaxEmptyLinesToKeep: 2
+TabWidth: 2
+UseTab: Never

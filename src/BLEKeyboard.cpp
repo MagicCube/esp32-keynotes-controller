@@ -62,14 +62,12 @@ void BLEKeyboardClass::pressKey(uint8_t keyCode) {
   uint8_t report[] = {0x0, 0x0, 0x51, 0x0, 0x0, 0x0, 0x0, 0x0};
   _inputCharacteristic->setValue(report, sizeof(report));
   _inputCharacteristic->notify();
-  LOG_D("Key '%d' has been pressed.", keyCode);
 }
 
 void BLEKeyboardClass::releaseAll() {
   uint8_t report[] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
   _inputCharacteristic->setValue(report, sizeof(report));
   _inputCharacteristic->notify();
-  LOG_D("All keys have been released.");
 }
 
 void BLEKeyboardClass::strokeKey(uint8_t keyCode) {

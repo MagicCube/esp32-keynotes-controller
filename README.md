@@ -5,9 +5,11 @@ Also known as `KeyLight`.
 
 ## Appearance
 
-![](./media/rendered.png)
+![rendered](./media/rendered.png)
 
 ## BOM
+
+![explosion](./media/explosion.png)
 
 - 3D Printed case and parts.
 - [ESP32 Devkit v1](https://item.taobao.com/item.htm?spm=a1z09.2.0.0.76d12e8dVNq61T&id=563668634893&_u=e10f2ti56b4) x 1

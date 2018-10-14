@@ -7,11 +7,13 @@ Also known as `KeyLight`.
 
 ![rendered](./media/rendered.png)
 
+[View in 3D](https://a360.co/2NFupAk)
+
 ## BOM
 
 ![explosion](./media/explosion.png)
 
-- 3D Printed case and parts.
+- [3D Printed case and parts](https://a360.co/2NFupAk)
 - [ESP32 Devkit v1](https://item.taobao.com/item.htm?spm=a1z09.2.0.0.76d12e8dVNq61T&id=563668634893&_u=e10f2ti56b4) x 1
 - [3.7v LiPo Battery](https://item.taobao.com/item.htm?spm=a1z09.2.0.0.76d12e8dVNq61T&id=523205607530&_u=e10f2ti89d2) x 1
 - [TP4056 LiPo Battery Charger Module](https://item.taobao.com/item.htm?spm=a1z09.2.0.0.76d12e8dVNq61T&id=522583198103&_u=e10f2tid961) x 1

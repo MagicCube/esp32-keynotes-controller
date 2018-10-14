@@ -52,6 +52,17 @@ void BLEKeyboardClass::stopAdvertising() {
   advertising->stop();
 }
 
+void BLEKeyboardClass::pressKey(uint8_t keyCode) {
+  uint8_t report[] = {0x0, 0x0, 0x51, 0x0, 0x0, 0x0, 0x0, 0x0};
+  _inputCharacteristic->setValue(report, sizeof(report));
+  _inputCharacteristic->notify();
+}
+
+void BLEKeyboardClass::releaseAll() {
+  uint8_t report[] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+  _inputCharacteristic->setValue(report, sizeof(report));
+  _inputCharacteristic->notify();
+}
 
 void BLEKeyboardClass::_setAccessPermission(BLECharacteristic *characteristic) {
   characteristic->setAccessPermissions(ESP_GATT_PERM_READ_ENCRYPTED |

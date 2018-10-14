@@ -16,16 +16,23 @@ public:
   // Initializes the BLE HID server.
   void begin();
 
-  // Start BLE advertising.
+  // Starts BLE advertising.
   void startAdvertising();
 
-  // Stop BLE advertising.
+  // Stops BLE advertising.
   void stopAdvertising();
+
+  // Simulates pressing the specific key.
+  void pressKey(uint8_t keyCode);
+
+  // Simulates releasing all the pressed keys.
+  void releaseAll();
 
 private:
   void _setAccessPermission(BLECharacteristic *characteristic);
   void _setAccessPermission(BLEService *service, uint16_t uuid);
 
+  bool _connected;
   BLEServer *_server;
   BLEHIDDevice *_hid;
   BLECharacteristic *_inputCharacteristic;

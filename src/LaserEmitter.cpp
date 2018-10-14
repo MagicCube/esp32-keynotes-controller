@@ -2,23 +2,21 @@
 
 #include "log.h"
 
-LaserEmitterClass::LaserEmitterClass() {
+LaserEmitter::LaserEmitter(uint8_t pin) {
+  _pin = pin;
 }
 
-void LaserEmitterClass::begin(uint8_t pin) {
-  _pin = pin;
+void LaserEmitter::begin() {
   pinMode(_pin, OUTPUT);
   turnOff();
 }
 
-void LaserEmitterClass::turnOn() {
+void LaserEmitter::turnOn() {
   digitalWrite(_pin, HIGH);
   LOG_D("Laser emitter has been turned <ON>.");
 }
 
-void LaserEmitterClass::turnOff() {
+void LaserEmitter::turnOff() {
   digitalWrite(_pin, LOW);
   LOG_D("Laser emitter has been turned <OFF>.");
 }
-
-LaserEmitterClass LaserEmitter;

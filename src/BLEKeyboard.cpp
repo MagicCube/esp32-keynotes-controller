@@ -28,17 +28,17 @@ void BLEKeyboardClass::begin() {
   _setAccessPermission(_hid->hidService(), 0x2a4e);
   _setAccessPermission(_hid->batteryService(), 0x2a19);
 
-  // Set battery level
+  // Set battery level.
   _hid->setBatteryLevel(100);
 
-  // Send HID report
+  // Send HID report.
   _hid->reportMap((uint8_t *)KEYBOARD_REPORT_MAP, sizeof(KEYBOARD_REPORT_MAP));
 
-  // Disable Security
+  // Disable Security.
   BLESecurity *security = new BLESecurity();
   security->setCapability(ESP_IO_CAP_NONE);
 
-  // Start HID service
+  // Start HID service.
   _hid->startServices();
 }
 

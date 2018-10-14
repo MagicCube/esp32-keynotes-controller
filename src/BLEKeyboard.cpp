@@ -59,7 +59,7 @@ void BLEKeyboardClass::stopAdvertising() {
 }
 
 void BLEKeyboardClass::pressKey(uint8_t keyCode) {
-  uint8_t report[] = {0x0, 0x0, 0x51, 0x0, 0x0, 0x0, 0x0, 0x0};
+  uint8_t report[] = {0x0, 0x0, keyCode, 0x0, 0x0, 0x0, 0x0, 0x0};
   _inputCharacteristic->setValue(report, sizeof(report));
   _inputCharacteristic->notify();
 }

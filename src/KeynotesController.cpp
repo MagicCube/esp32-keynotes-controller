@@ -13,7 +13,7 @@ void KeynotesControllerClass::nextSlide() {
 }
 
 void KeynotesControllerClass::previousSlide() {
-  BLEKeyboard.strokeKey(KEY_CODE_NEXT_SLIDE);
+  BLEKeyboard.strokeKey(KEY_CODE_PREVIOUS_SLIDE);
 }
 
 KeynotesControllerClass KeynotesController;

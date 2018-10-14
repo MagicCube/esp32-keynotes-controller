@@ -1,6 +1,8 @@
 #include <Arduino.h>
 
 #include <BLEDevice.h>
+#include <soc/rtc_cntl_reg.h>
+#include <soc/soc.h>
 
 #include "conf.h"
 #include "log.h"
@@ -8,14 +10,19 @@
 #include "BLEKeyboard.h"
 #include "Button.h"
 #include "KeynotesController.h"
-#include "LaserEmitter.h"
+#include "LaserLight.h"
 
 Button previousSlideButton(PREVIOUS_SLIDE_BUTTON_PIN);
 Button nextSlideButton(NEXT_SLIDE_BUTTON_PIN);
 Button laserButton(LASER_BUTTON_PIN);
-LaserEmitter laserEmitter(LASER_EMITTER_PIN);
+LaserLight laserLight(LASER_LIGHT_PIN);
+
+int eventCounter = 0;
 
 void setup() {
+  // Disable brownout detector
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
+
   Serial.begin(115200);
   Serial.println();
 
@@ -24,10 +31,20 @@ void setup() {
   LOG_I("Copyright %d. All rights reserved.", 2018);
 
   // Initialize buttons and laser emitter.
+  previousSlideButton.onPress([]() {
+    LOG_D("Previous button pressed.");
+    KeynotesController.previousSlide();
+  });
   previousSlideButton.begin();
+  nextSlideButton.onPress([]() {
+    LOG_D("Next button pressed.");
+    KeynotesController.nextSlide();
+  });
   nextSlideButton.begin();
+  laserButton.onPress([]() { laserLight.turnOn(); });
+  laserButton.onRelease([]() { laserLight.turnOff(); });
   laserButton.begin();
-  laserEmitter.begin();
+  laserLight.begin();
 
   LOG_I("Initializing BLE Device '%s'...", DEVICE_NAME);
   BLEDevice::init(DEVICE_NAME);

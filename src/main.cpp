@@ -32,12 +32,12 @@ void setup() {
 
   // Initialize buttons and laser emitter.
   previousSlideButton.onPress([]() {
-    LOG_D("Previous button pressed.");
+    LOG_D("<<");
     KeynotesController.previousSlide();
   });
   previousSlideButton.begin();
   nextSlideButton.onPress([]() {
-    LOG_D("Next button pressed.");
+    LOG_D(">>");
     KeynotesController.nextSlide();
   });
   nextSlideButton.begin();

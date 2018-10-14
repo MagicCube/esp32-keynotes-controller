@@ -48,13 +48,14 @@ void BLEKeyboardClass::startAdvertising() {
   advertising->addServiceUUID(_hid->hidService()->getUUID());
   advertising->start();
   _server->startAdvertising();
-  LOG_I("BLE advertising has been stated.");
+  LOG_I("BLE advertising has been <STARTED>.");
+  LOG_I("Search '%s' in your Bluetooth device list.", DEVICE_NAME);
 }
 
 void BLEKeyboardClass::stopAdvertising() {
   BLEAdvertising *advertising = _server->getAdvertising();
   advertising->stop();
-  LOG_I("BLE advertising has been stopped.");
+  LOG_I("BLE advertising has been <STOPPED>.");
 }
 
 void BLEKeyboardClass::pressKey(uint8_t keyCode) {
@@ -78,13 +79,13 @@ void BLEKeyboardClass::strokeKey(uint8_t keyCode) {
 
 void BLEKeyboardClass::onConnect(BLEServer *server) {
   _connected = true;
-  LOG_I("%s has been connected.", DEVICE_NAME);
+  LOG_I("%s has been <CONNECTED>.", DEVICE_NAME);
   stopAdvertising();
 }
 
 void BLEKeyboardClass::onDisconnect(BLEServer *server) {
   _connected = false;
-  LOG_I("%s has been disconnected.", DEVICE_NAME);
+  LOG_I("%s has been <DISCONNECTED>.", DEVICE_NAME);
   startAdvertising();
 }
 

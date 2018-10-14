@@ -2,7 +2,7 @@
 
 #include <BLEHIDDevice.h>
 
-#define DEVICE_NAME "KeyLight"
+#define DEVICE_NAME "Henry-KeyLight"
 
 #define LASER_EMITTER_PIN 23
 #define NEXT_SLIDE_BUTTON_PIN 20

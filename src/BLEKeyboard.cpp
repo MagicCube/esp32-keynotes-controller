@@ -78,6 +78,10 @@ void BLEKeyboardClass::strokeKey(uint8_t keyCode) {
 void BLEKeyboardClass::onConnect(BLEServer *server) {
   _connected = true;
   LOG_I("%s has been <CONNECTED>.", DEVICE_NAME);
+  // workaround after reconnect                
+  BLEDescriptor *desc = _inputCharacteristic->getDescriptorByUUID(BLEUUID((uint16_t)0x2902));
+  uint8_t val[] = {0x01, 0x00};
+  desc->setValue(val, 2);
   stopAdvertising();
 }
 
